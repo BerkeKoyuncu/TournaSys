@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.tournasys.controller.RegisterController"
+           stylesheets="@../css/app.css"
+           styleClass="auth-root">
+
+    <VBox alignment="CENTER"
+          spacing="16"
+          styleClass="auth-card"
+          minWidth="380"
+          prefWidth="380"
+          maxWidth="380"
+          minHeight="460"
+          prefHeight="460"
+          maxHeight="460">
+        <padding>
+            <Insets top="32" right="32" bottom="32" left="32"/>
+        </padding>
+
+        <!-- LOGO -->
+        <Label text="TournaSys" styleClass="auth-logo"/>
+
+        <!-- TITLE -->
+        <Label text="Create Account" styleClass="auth-title"/>
+        <Label text="Register a new user." styleClass="auth-subtitle"/>
+
+        <VBox spacing="6" alignment="CENTER_LEFT" maxWidth="320">
+            <Label text="Username" styleClass="form-label"/>
+            <TextField fx:id="usernameField"
+                       promptText="Enter username"
+                       styleClass="auth-input"/>
+        </VBox>
+
+        <VBox spacing="6" alignment="CENTER_LEFT" maxWidth="320">
+            <Label text="Password" styleClass="form-label"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter password"
+                           styleClass="auth-input"/>
+        </VBox>
+
+        <VBox spacing="6" alignment="CENTER_LEFT" maxWidth="320">
+            <Label text="Role" styleClass="form-label"/>
+            <ComboBox fx:id="roleBox"
+                      promptText="Select role"
+                      prefWidth="320"
+                      styleClass="auth-combo">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="manager"/>
+                        <String fx:value="player"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
+
+        <VBox spacing="10" alignment="CENTER" maxWidth="320">
+            <Button text="Register"
+                    onAction="#handleRegister"
+                    maxWidth="320"
+                    styleClass="button, primary-button"/>
+
+            <Button text="Back to Log In"
+                    onAction="#goToLogin"
+                    maxWidth="320"
+                    styleClass="button, secondary-button"/>
+        </VBox>
+
+    </VBox>
+
+</StackPane>

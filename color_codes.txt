@@ -1,0 +1,73 @@
+Primary Green
+#316033 → Primary (Ana yeşil)
+#3E7A41 → Hover / active green
+#274D29 → Dark green (header / nav / stronger emphasis)
+
+Neutral Whites / Grays
+#F6F6F6 → Main background
+#FFFFFF → Cards / surfaces / panels
+#EDEDED → Border / subtle separation
+#DCDCDC → Slightly stronger divider / disabled border
+
+Navigation Bar
+Background: #274D29
+Text: #FFFFFF
+Active item: #3E7A41
+Hover: #316033
+
+Main Content Area
+Background: #F6F6F6
+Section background: #FFFFFF
+Border: #EDEDED
+
+Cards / Panels
+Background: #FFFFFF
+Border: #EDEDED
+Shadow (JavaFX CSS): -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);
+
+Primary Button
+Background: #316033
+Text: #FFFFFF
+Hover: #3E7A41
+
+Secondary Button
+Background: transparent
+Border: #316033
+Text: #316033
+Hover background: #F0F4F0
+
+Danger (e.g. delete)
+Background: #B56576
+Hover: #9C4F60
+
+Input Fields (including Login)
+Background: #FFFFFF
+Border: #DCDCDC
+Focus Border: #316033
+Text: #2F2F2F
+Prompt Text: #7A7A7A
+
+Table / List
+Header: #E9EFE9
+Header Text: #274D29
+Row:
+    Odd: #FFFFFF
+    Even: #F6F6F6
+Selected row: #DCE8DD
+
+Text Colors
+Primary Heading: #1F1F1F
+Secondary Heading: #2F2F2F
+Body Text: #444444
+Muted Text: #6F6F6F
+Text On Dark Background: #FFFFFF
+
+Status Colors
+Success: #7FB069
+Warning: #E9C46A
+Error: #E76F51
+Info: #577590
+
+Typography
+Heading: Inter SemiBold
+Body: Inter Regular
