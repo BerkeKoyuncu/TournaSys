@@ -18,4 +18,24 @@ public class Match {
         this.awayTeam = awayTeam;
         this.status = "Scheduled";
     }
+
+    
+    // Maça skor girmek için kullanılacak metot
+    public void setScore(int home, int away) {
+        this.homeScore = home;
+        this.awayScore = away;
+        this.status = "Played"; // Skor girilince maç durumu güncellenir
+    }
+
+    // Skorları karşılaştırıp kazananı döndüren metot
+    public Team getWinner() {
+        if (this.homeScore > this.awayScore) {
+            return this.homeTeam;
+        } else if (this.awayScore > this.homeScore) {
+            return this.awayTeam;
+        } else {
+            return null; // Beraberlik durumu
+        }
+    }
+    
 }
