@@ -1,6 +1,8 @@
 package com.tournasys.service;
 
 import com.tournasys.exception.AuthenticationException;
+import com.tournasys.model.Manager;
+import com.tournasys.model.Player;
 import com.tournasys.model.User;
 import com.tournasys.repository.UserRepository;
 
@@ -8,14 +10,21 @@ public class AuthenticationService {
 
     private final UserRepository userRepository = new UserRepository();
 
-    public User login(String username, String password) {
+    private String hashPassword(String password) {
+        return Integer.toHexString(password.hashCode());
+    }
+
+   public User login(String username, String password) {
+
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
-            throw new AuthenticationException("User not found.");
+            throw new IllegalArgumentException("User not found.");
         }
 
-        if (!user.getPasswordHash().equals(password)) {
+        String hashedPassword = hashPassword(password);
+
+        if (!user.getPasswordHash().equals(hashedPassword)) {
             throw new AuthenticationException("Wrong password.");
         }
 
@@ -23,6 +32,7 @@ public class AuthenticationService {
     }
 
     public void register(String username, String password, String role) {
+
         if (username == null || username.isBlank()) {
             throw new IllegalArgumentException("Username cannot be empty.");
         }
@@ -40,7 +50,14 @@ public class AuthenticationService {
             throw new IllegalArgumentException("This username is already taken.");
         }
 
-        User newUser = new User(0, username, password, role);
+        String hashedPassword = hashPassword(password);
+
+        User newUser = switch (role.toLowerCase()) {
+            case "manager" -> new Manager(0, username, hashedPassword);
+            case "player" -> new Player(0, username, hashedPassword);
+            default -> throw new IllegalArgumentException("Invalid role: " + role);
+        };
+
         userRepository.saveUser(newUser);
     }
 }
