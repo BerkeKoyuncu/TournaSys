@@ -15,9 +15,10 @@ public class Standings {
         rows.clear();
 
         List<Team> sortedTeams = new ArrayList<>(teams);
+
         sortedTeams.sort(
                 Comparator.comparingInt(Team::getPoints).reversed()
-                        .thenComparingInt(Team::getWon).reversed()
+                        .thenComparing(Comparator.comparingInt(Team::getWon).reversed())
                         .thenComparing(Team::getName)
         );
 

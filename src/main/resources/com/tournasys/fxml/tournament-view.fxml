@@ -51,8 +51,9 @@
                     </ComboBox>
 
                     <HBox spacing="10">
-                        <Button text="Create" styleClass="primary-button"/>
-                        <Button text="Clear" styleClass="secondary-button"/>
+                        <Button text="Create" onAction="#handleCreateTournament" styleClass="primary-button"/>
+                        <Button text="Delete Selected" onAction="#handleDeleteTournament" styleClass="secondary-button"/>
+                        <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
                     </HBox>
 
                 </VBox>
@@ -62,10 +63,10 @@
 
                     <TableView fx:id="table" prefHeight="400">
                         <columns>
-                            <TableColumn text="ID" prefWidth="70"/>
-                            <TableColumn text="Name" prefWidth="220"/>
-                            <TableColumn text="Type" prefWidth="140"/>
-                            <TableColumn text="Status" prefWidth="140"/>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                            <TableColumn fx:id="nameColumn" text="Name" prefWidth="220"/>
+                            <TableColumn fx:id="typeColumn" text="Type" prefWidth="140"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="140"/>
                         </columns>
                     </TableView>
                 </VBox>

@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tournasys.exception.DuplicateTeamException;
+import com.tournasys.interfaces.Manageable;
 import com.tournasys.interfaces.Schedulable;
 
-public class Tournament implements Schedulable {
+public class Tournament implements Schedulable , Manageable {
     private final int tournamentId;
     private String name;
     private String type;
@@ -26,6 +27,7 @@ public class Tournament implements Schedulable {
         this.standings = new Standings();
     }
 
+    @Override
     public void addTeam(Team team) throws DuplicateTeamException {
         if (team == null) {
         throw new IllegalArgumentException("Team cannot be null");
@@ -41,6 +43,7 @@ public class Tournament implements Schedulable {
         standings.recalculate(teams);
     }
 
+    @Override
     public boolean removeTeam(int teamId) {
         boolean removed = teams.removeIf(team -> team.getTeamId() == teamId);
 
@@ -90,23 +93,22 @@ public class Tournament implements Schedulable {
         }
 
         for (Match match : matches) {
-            if (!"Completed".equals(match.getStatus())) {
+            if (!match.isCompleted()) {
                 continue;
             }
 
-            if (match.isDraw()) {
-                match.getHomeTeam().recordDraw();
-                match.getAwayTeam().recordDraw();
-            } else {
-                Team winner = match.getWinner();
+            Team homeTeam = match.getHomeTeam();
+            Team awayTeam = match.getAwayTeam();
 
-                if (winner == match.getHomeTeam()) {
-                    match.getHomeTeam().recordWin();
-                    match.getAwayTeam().recordLoss();
-                } else if (winner == match.getAwayTeam()) {
-                    match.getAwayTeam().recordWin();
-                    match.getHomeTeam().recordLoss();
-                }
+            if (match.isDraw()) {
+                homeTeam.recordDraw();
+                awayTeam.recordDraw();
+            } else if (match.getHomeScore() > match.getAwayScore()) {
+                homeTeam.recordWin();
+                awayTeam.recordLoss();
+            } else {
+                awayTeam.recordWin();
+                homeTeam.recordLoss();
             }
         }
 
@@ -118,6 +120,16 @@ public class Tournament implements Schedulable {
             .filter(t -> t.getTeamId() == teamId)
             .findFirst()
             .orElse(null);
+    }
+
+    @Override
+    public List<Match> getSchedule() {
+        return matches;
+    }
+
+    @Override
+    public boolean isScheduleGenerated() {
+        return !matches.isEmpty();
     }
 
     public boolean isCompleted() {

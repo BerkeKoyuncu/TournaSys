@@ -2,7 +2,9 @@ package com.tournasys.model;
 
 import java.time.LocalDateTime;
 
-public class Match {
+import com.tournasys.interfaces.Scorable;
+
+public class Match implements Scorable {
     private final int matchId;
     private LocalDateTime matchDate;
     private final Team homeTeam;
@@ -23,6 +25,7 @@ public class Match {
     this.status = "Scheduled";
     }
 
+    @Override
     public void setScore(int homeScore, int awayScore) {
 
          if ("Completed".equals(status)) {
@@ -56,6 +59,7 @@ public class Match {
         return "Completed".equals(status) && homeScore == awayScore;
     }
 
+    @Override
     public boolean isCompleted() {
     return "Completed".equals(status);
     }
