@@ -2,6 +2,7 @@ package com.tournasys.app;
 
 import com.tournasys.config.DatabaseConnection;
 import com.tournasys.util.SceneManager;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -19,6 +20,7 @@ public class MainApp extends Application {
 
         SceneManager.setStage(primaryStage);
         SceneManager.switchScene("/com/tournasys/fxml/login-view.fxml");
+        primaryStage.setTitle("TournaSys");
 
         primaryStage.centerOnScreen();
         primaryStage.show();

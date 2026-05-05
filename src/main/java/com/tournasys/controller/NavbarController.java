@@ -1,6 +1,8 @@
 package com.tournasys.controller;
 
 import com.tournasys.util.SceneManager;
+import com.tournasys.util.SessionManager;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -79,8 +81,10 @@ public class NavbarController {
         SceneManager.switchScene("/com/tournasys/fxml/standings-view.fxml");
     }
 
-    @FXML
-    public void logout(ActionEvent event) {
+     @FXML
+    private void handleLogout() {
+        SessionManager.logout();
+
         SceneManager.switchScene("/com/tournasys/fxml/login-view.fxml");
     }
 }

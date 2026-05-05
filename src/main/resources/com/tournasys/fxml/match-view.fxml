@@ -32,13 +32,10 @@
             <HBox spacing="20">
 
                 <VBox spacing="10" styleClass="card" prefWidth="340">
-                    <Label text="Create Match" styleClass="page-title"/>
+                    <Label text="Match Operations" styleClass="page-title"/>
 
-                    <Label text="Home Team"/>
-                    <ComboBox fx:id="homeTeamBox" styleClass="input-field" prefWidth="270"/>
-
-                    <Label text="Away Team"/>
-                    <ComboBox fx:id="awayTeamBox" styleClass="input-field" prefWidth="270"/>
+                    <Label text="Tournament"/>
+                    <ComboBox fx:id="tournamentBox" styleClass="input-field" prefWidth="270"/>
 
                     <Label text="Home Score"/>
                     <TextField fx:id="homeScoreField" styleClass="input-field"/>
@@ -47,8 +44,8 @@
                     <TextField fx:id="awayScoreField" styleClass="input-field"/>
 
                     <HBox spacing="10">
-                        <Button text="Save Match" styleClass="primary-button"/>
-                        <Button text="Clear" styleClass="secondary-button"/>
+                        <Button text="Generate Schedule" onAction="#handleGenerateSchedule" styleClass="primary-button"/>
+                        <Button text="Update Score" onAction="#handleUpdateScore" styleClass="secondary-button"/>
                     </HBox>
                 </VBox>
 
@@ -57,11 +54,12 @@
 
                     <TableView fx:id="matchTable" prefHeight="420">
                         <columns>
-                            <TableColumn text="ID" prefWidth="70"/>
-                            <TableColumn text="Home Team" prefWidth="170"/>
-                            <TableColumn text="Away Team" prefWidth="170"/>
-                            <TableColumn text="Score" prefWidth="100"/>
-                            <TableColumn text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                            <TableColumn fx:id="homeColumn" text="Home Team" prefWidth="170"/>
+                            <TableColumn fx:id="awayColumn" text="Away Team" prefWidth="170"/>
+                            <TableColumn fx:id="homeScoreColumn" text="Home" prefWidth="80"/>
+                            <TableColumn fx:id="awayScoreColumn" text="Away" prefWidth="80"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
                         </columns>
                     </TableView>
                 </VBox>

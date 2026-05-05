@@ -1,12 +1,13 @@
 package com.tournasys.service;
 
 import com.tournasys.exception.AuthenticationException;
+import com.tournasys.interfaces.Authenticatable;
 import com.tournasys.model.Manager;
 import com.tournasys.model.Player;
 import com.tournasys.model.User;
 import com.tournasys.repository.UserRepository;
 
-public class AuthenticationService {
+public class AuthenticationService implements Authenticatable {
 
     private final UserRepository userRepository = new UserRepository();
 
@@ -14,6 +15,7 @@ public class AuthenticationService {
         return Integer.toHexString(password.hashCode());
     }
 
+    @Override
    public User login(String username, String password) {
 
         User user = userRepository.findByUsername(username);
@@ -31,6 +33,7 @@ public class AuthenticationService {
         return user;
     }
 
+    @Override
     public void register(String username, String password, String role) {
 
         if (username == null || username.isBlank()) {
