@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.tournasys.controller.MatchController"
+            stylesheets="@../css/app.css"
+            styleClass="root-container">
+
+    <top>
+        <fx:include fx:id="navbar" source="navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="30" left="30" right="30" bottom="30"/>
+            </padding>
+
+            <Label text="Match Management" styleClass="page-title"/>
+            <Label text="Schedule matches and enter scores." styleClass="page-subtitle"/>
+
+            <HBox spacing="20">
+
+                <VBox spacing="10" styleClass="card" prefWidth="340">
+                    <Label text="Match Operations" styleClass="page-title"/>
+
+                    <Label text="Tournament"/>
+                    <ComboBox fx:id="tournamentBox" styleClass="input-field" prefWidth="270"/>
+
+                    <Label text="Home Score"/>
+                    <TextField fx:id="homeScoreField" styleClass="input-field"/>
+
+                    <Label text="Away Score"/>
+                    <TextField fx:id="awayScoreField" styleClass="input-field"/>
+
+                    <HBox spacing="10">
+                        <Button text="Generate Schedule" onAction="#handleGenerateSchedule" styleClass="primary-button"/>
+                        <Button text="Update Score" onAction="#handleUpdateScore" styleClass="secondary-button"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Match List" styleClass="page-title"/>
+
+                    <TableView fx:id="matchTable" prefHeight="420">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                            <TableColumn fx:id="homeColumn" text="Home Team" prefWidth="170"/>
+                            <TableColumn fx:id="awayColumn" text="Away Team" prefWidth="170"/>
+                            <TableColumn fx:id="homeScoreColumn" text="Home" prefWidth="80"/>
+                            <TableColumn fx:id="awayScoreColumn" text="Away" prefWidth="80"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -26,3 +26,13 @@ Thumbs.db
 
 # Java
 *.class
+target/
+out/
+src/out/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+javafx-sdk-*/
+lib/

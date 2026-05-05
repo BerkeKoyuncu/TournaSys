@@ -1,14 +1,16 @@
 package com.tournasys.model;
 
 public abstract class User {
-    private int userId;
+    private final int userId;
     private String username;
     private String passwordHash;
+    private String role;
 
-    public User(int userId, String username, String passwordHash) {
+    public User(int userId, String username, String passwordHash, String role) {
         this.userId = userId;
         this.username = username;
         this.passwordHash = passwordHash;
+        this.role = role;
     }
 
     public int getUserId() {
@@ -21,5 +23,26 @@ public abstract class User {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return username + " (" + role + ")";
     }
 }

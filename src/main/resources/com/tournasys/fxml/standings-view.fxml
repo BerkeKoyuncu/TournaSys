@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tournasys.controller.StandingsController"
+            stylesheets="@../css/app.css"
+            styleClass="root-container">
+
+    <top>
+        <fx:include fx:id="navbar" source="navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="30" left="30" right="30" bottom="30"/>
+            </padding>
+
+            <Label text="Standings" styleClass="page-title"/>
+            <Label text="View tournament rankings." styleClass="page-subtitle"/>
+
+            <VBox spacing="12" styleClass="card">
+                <Label text="Tournament"/>
+                <ComboBox fx:id="tournamentBox"
+                          promptText="Select Tournament"
+                          prefWidth="280"
+                          styleClass="input-field"/>
+
+                <TableView fx:id="standingsTable" prefHeight="450">
+                    <columns>
+                        <TableColumn fx:id="posColumn" text="Pos" prefWidth="70"/>
+                        <TableColumn fx:id="teamColumn" text="Team" prefWidth="220"/>
+                        <TableColumn fx:id="playedColumn" text="P" prefWidth="70"/>
+                        <TableColumn fx:id="wonColumn" text="W" prefWidth="70"/>
+                        <TableColumn fx:id="drawColumn" text="D" prefWidth="70"/>
+                        <TableColumn fx:id="lostColumn" text="L" prefWidth="70"/>
+                        <TableColumn fx:id="pointsColumn" text="Pts" prefWidth="80"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>

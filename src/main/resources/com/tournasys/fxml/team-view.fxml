@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.tournasys.controller.TeamController"
+            stylesheets="@../css/app.css"
+            styleClass="root-container">
+
+    <top>
+        <fx:include fx:id="navbar" source="navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="30" left="30" right="30" bottom="30"/>
+            </padding>
+
+            <Label text="Team Management" styleClass="page-title"/>
+            <Label text="Create and manage teams." styleClass="page-subtitle"/>
+
+            <HBox spacing="20">
+
+                <VBox spacing="10" styleClass="card" prefWidth="320">
+                    <Label text="Create Team" styleClass="page-title"/>
+
+                    <Label text="Tournament"/>
+                    <ComboBox fx:id="tournamentBox" styleClass="input-field" prefWidth="270"/>
+
+                    <Label text="Team Name"/>
+                    <TextField fx:id="teamNameField" styleClass="input-field"/>
+
+                    <HBox spacing="10">
+                        <Button text="Add" onAction="#handleAddTeam" styleClass="primary-button"/>
+                        <Button text="Delete Selected" onAction="#handleDeleteTeam" styleClass="secondary-button"/>
+                        <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Team List" styleClass="page-title"/>
+
+                    <TableView fx:id="teamTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="teamIdColumn" text="ID" prefWidth="80"/>
+                            <TableColumn fx:id="teamNameColumn" text="Name" prefWidth="220"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
