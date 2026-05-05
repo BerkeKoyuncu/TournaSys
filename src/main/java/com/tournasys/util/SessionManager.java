@@ -40,4 +40,10 @@ public class SessionManager {
 
         return currentUser.getUserId();
     }
+
+    public static void requireManager() {
+        if (!isManager()) {
+            throw new SecurityException("Only managers can perform this operation.");
+        }
+    }
 }

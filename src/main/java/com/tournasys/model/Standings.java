@@ -30,12 +30,15 @@ public class Standings {
     }
 
     public void clear() {
-    rows.clear();
+        rows.clear();
     }
 
     public StandingRow getLeader() {
-    if (rows.isEmpty()) return null;
-    return rows.get(0);
+        if (rows.isEmpty()) {
+            return null;
+        }
+
+        return rows.get(0);
     }
 
     public void displayTable() {

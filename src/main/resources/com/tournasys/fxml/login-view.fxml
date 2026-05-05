@@ -51,12 +51,12 @@
             <Button text="Log In"
                     onAction="#handleLogin"
                     maxWidth="320"
-                    styleClass="button, primary-button"/>
+                    styleClass="primary-button"/>
 
             <Button text="Register"
                     onAction="#goToRegister"
                     maxWidth="320"
-                    styleClass="button, secondary-button"/>
+                    styleClass="secondary-button"/>
         </VBox>
 
     </VBox>

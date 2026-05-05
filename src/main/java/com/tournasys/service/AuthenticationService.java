@@ -9,6 +9,9 @@ import com.tournasys.repository.UserRepository;
 
 public class AuthenticationService implements Authenticatable {
 
+    private static final String USERNAME_PATTERN = "^[A-Za-z0-9_]{3,20}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[^A-Za-z0-9\\s])\\S{8,}$";
+
     private final UserRepository userRepository = new UserRepository();
 
     private String hashPassword(String password) {
@@ -16,7 +19,7 @@ public class AuthenticationService implements Authenticatable {
     }
 
     @Override
-   public User login(String username, String password) {
+    public User login(String username, String password) {
 
         User user = userRepository.findByUsername(username);
 
@@ -36,13 +39,8 @@ public class AuthenticationService implements Authenticatable {
     @Override
     public void register(String username, String password, String role) {
 
-        if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username cannot be empty.");
-        }
-
-        if (password == null || password.isBlank()) {
-            throw new IllegalArgumentException("Password cannot be empty.");
-        }
+        validateUsername(username);
+        validatePassword(password);
 
         if (role == null || role.isBlank()) {
             throw new IllegalArgumentException("Role must be selected.");
@@ -62,5 +60,29 @@ public class AuthenticationService implements Authenticatable {
         };
 
         userRepository.saveUser(newUser);
+    }
+
+    private void validateUsername(String username) {
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("Username cannot be empty.");
+        }
+
+        if (!username.matches(USERNAME_PATTERN)) {
+            throw new IllegalArgumentException(
+                    "Username must be 3-20 characters and use only letters, numbers, or underscore."
+            );
+        }
+    }
+
+    private void validatePassword(String password) {
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be empty.");
+        }
+
+        if (!password.matches(PASSWORD_PATTERN)) {
+            throw new IllegalArgumentException(
+                    "Password must be at least 8 characters and include a letter, number, and special character."
+            );
+        }
     }
 }

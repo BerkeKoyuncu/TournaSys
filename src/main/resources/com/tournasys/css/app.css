@@ -163,6 +163,70 @@
     -fx-background-color: #DCE8DD;
 }
 
+.bracket-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: #EDEDED;
+}
+
+.bracket-scroll .viewport {
+    -fx-background-color: #FFFFFF;
+}
+
+.bracket-container {
+    -fx-padding: 18;
+    -fx-background-color: #FFFFFF;
+}
+
+.bracket-round {
+    -fx-background-color: #F6F6F6;
+    -fx-border-color: #E4E4E4;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 14;
+}
+
+.bracket-round-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #274D29;
+}
+
+.bracket-match-card {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DCDCDC;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+    -fx-min-width: 170;
+}
+
+.bracket-team {
+    -fx-font-size: 13px;
+    -fx-text-fill: #1F1F1F;
+}
+
+.bracket-status {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6F6F6F;
+}
+
+.tournament-winner-label {
+    -fx-background-color: #E9EFE9;
+    -fx-border-color: #C9D8C9;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #274D29;
+}
+
+.bracket-winner {
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #316033;
+}
+
 /* AUTH SCREENS */
 .auth-root {
     -fx-background-color: #F6F6F6;
@@ -203,6 +267,17 @@
     -fx-font-size: 13px;
     -fx-font-weight: 600;
     -fx-text-fill: #2F2F2F;
+}
+
+.input-help-box {
+    -fx-background-color: #F0F4F0;
+    -fx-border-color: #C9D8C9;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 7 9;
+    -fx-min-width: 300;
+    -fx-font-size: 11px;
+    -fx-text-fill: #355235;
 }
 
 /* INPUT */

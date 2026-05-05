@@ -29,11 +29,11 @@
             </padding>
 
             <Label text="Tournament Management" styleClass="page-title"/>
-            <Label text="Create and manage tournaments." styleClass="page-subtitle"/>
+            <Label fx:id="subtitleLabel" text="Create and manage tournaments." styleClass="page-subtitle"/>
 
             <HBox spacing="20">
 
-                <VBox spacing="10" styleClass="card" prefWidth="320">
+                <VBox fx:id="operationCard" spacing="10" styleClass="card" prefWidth="320">
 
                     <Label text="Create Tournament" styleClass="page-title"/>
 
@@ -51,8 +51,8 @@
                     </ComboBox>
 
                     <HBox spacing="10">
-                        <Button text="Create" onAction="#handleCreateTournament" styleClass="primary-button"/>
-                        <Button text="Delete Selected" onAction="#handleDeleteTournament" styleClass="secondary-button"/>
+                        <Button fx:id="createButton" text="Create" onAction="#handleCreateTournament" styleClass="primary-button"/>
+                        <Button fx:id="deleteButton" text="Delete Selected" onAction="#handleDeleteTournament" styleClass="secondary-button"/>
                         <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
                     </HBox>
 

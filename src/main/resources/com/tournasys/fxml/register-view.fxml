@@ -22,9 +22,9 @@
           minWidth="380"
           prefWidth="380"
           maxWidth="380"
-          minHeight="460"
-          prefHeight="460"
-          maxHeight="460">
+          minHeight="520"
+          prefHeight="520"
+          maxHeight="520">
         <padding>
             <Insets top="32" right="32" bottom="32" left="32"/>
         </padding>
@@ -41,6 +41,12 @@
             <TextField fx:id="usernameField"
                        promptText="Enter username"
                        styleClass="auth-input"/>
+            <Label fx:id="usernameHint"
+                   text="Use 3-20 characters. Letters, numbers, and underscore only."
+                   styleClass="input-help-box"
+                   visible="false"
+                   managed="false"
+                   wrapText="true"/>
         </VBox>
 
         <VBox spacing="6" alignment="CENTER_LEFT" maxWidth="320">
@@ -48,6 +54,12 @@
             <PasswordField fx:id="passwordField"
                            promptText="Enter password"
                            styleClass="auth-input"/>
+            <Label fx:id="passwordHint"
+                   text="8+ chars: letter, number, special character."
+                   styleClass="input-help-box"
+                   visible="false"
+                   managed="false"
+                   wrapText="true"/>
         </VBox>
 
         <VBox spacing="6" alignment="CENTER_LEFT" maxWidth="320">
@@ -58,8 +70,8 @@
                       styleClass="auth-combo">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="manager"/>
-                        <String fx:value="player"/>
+                        <String fx:value="Manager"/>
+                        <String fx:value="Player"/>
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -69,12 +81,12 @@
             <Button text="Register"
                     onAction="#handleRegister"
                     maxWidth="320"
-                    styleClass="button, primary-button"/>
+                    styleClass="primary-button"/>
 
             <Button text="Back to Log In"
                     onAction="#goToLogin"
                     maxWidth="320"
-                    styleClass="button, secondary-button"/>
+                    styleClass="secondary-button"/>
         </VBox>
 
     </VBox>

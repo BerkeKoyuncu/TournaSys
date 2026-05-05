@@ -49,6 +49,12 @@
                         text="Standings"
                         onAction="#goStandings"
                         styleClass="nav-button"/>
+                <Region styleClass="nav-divider"/>
+
+                <Button fx:id="bracketButton"
+                        text="Bracket"
+                        onAction="#goBracket"
+                        styleClass="nav-button"/>
 
             </HBox>
         </StackPane>
@@ -56,7 +62,7 @@
 
     <right>
         <HBox alignment="CENTER_RIGHT" styleClass="nav-right-group">
-            <Button text="Logout" onAction="#handleLogout"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-logout"/>
         </HBox>
     </right>
 

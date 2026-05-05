@@ -27,26 +27,28 @@
             </padding>
 
             <Label text="Match Management" styleClass="page-title"/>
-            <Label text="Schedule matches and enter scores." styleClass="page-subtitle"/>
+            <Label fx:id="subtitleLabel" text="Schedule matches and enter scores." styleClass="page-subtitle"/>
 
             <HBox spacing="20">
 
                 <VBox spacing="10" styleClass="card" prefWidth="340">
-                    <Label text="Match Operations" styleClass="page-title"/>
+                    <Label text="Tournament" styleClass="page-title"/>
 
                     <Label text="Tournament"/>
                     <ComboBox fx:id="tournamentBox" styleClass="input-field" prefWidth="270"/>
 
-                    <Label text="Home Score"/>
-                    <TextField fx:id="homeScoreField" styleClass="input-field"/>
+                    <VBox fx:id="operationCard" spacing="10">
+                        <Label text="Home Score"/>
+                        <TextField fx:id="homeScoreField" styleClass="input-field"/>
 
-                    <Label text="Away Score"/>
-                    <TextField fx:id="awayScoreField" styleClass="input-field"/>
+                        <Label text="Away Score"/>
+                        <TextField fx:id="awayScoreField" styleClass="input-field"/>
 
-                    <HBox spacing="10">
-                        <Button text="Generate Schedule" onAction="#handleGenerateSchedule" styleClass="primary-button"/>
-                        <Button text="Update Score" onAction="#handleUpdateScore" styleClass="secondary-button"/>
-                    </HBox>
+                        <HBox spacing="10">
+                            <Button fx:id="generateScheduleButton" text="Generate Schedule" onAction="#handleGenerateSchedule" styleClass="primary-button"/>
+                            <Button fx:id="updateScoreButton" text="Update Score" onAction="#handleUpdateScore" styleClass="secondary-button"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
 
                 <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">

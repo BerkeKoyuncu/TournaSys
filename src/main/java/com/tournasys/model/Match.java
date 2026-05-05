@@ -14,22 +14,26 @@ public class Match implements Scorable {
     private String status;
 
     public Match(int matchId, LocalDateTime matchDate, Team homeTeam, Team awayTeam) {
-    if (homeTeam.equals(awayTeam)) {
-        throw new IllegalArgumentException("A team cannot play against itself.");
-    }
+        if (homeTeam == null || awayTeam == null) {
+            throw new IllegalArgumentException("Match teams cannot be null.");
+        }
 
-    this.matchId = matchId;
-    this.matchDate = matchDate;
-    this.homeTeam = homeTeam;
-    this.awayTeam = awayTeam;
-    this.status = "Scheduled";
+        if (homeTeam.equals(awayTeam)) {
+            throw new IllegalArgumentException("A team cannot play against itself.");
+        }
+
+        this.matchId = matchId;
+        this.matchDate = matchDate;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.status = "Scheduled";
     }
 
     @Override
     public void setScore(int homeScore, int awayScore) {
 
-         if ("Completed".equals(status)) {
-        throw new IllegalStateException("Match already completed.");
+        if ("Completed".equals(status)) {
+            throw new IllegalStateException("Match already completed.");
         }
 
         if (homeScore < 0 || awayScore < 0) {
@@ -61,7 +65,7 @@ public class Match implements Scorable {
 
     @Override
     public boolean isCompleted() {
-    return "Completed".equals(status);
+        return "Completed".equals(status);
     }
 
     public int getMatchId() {
