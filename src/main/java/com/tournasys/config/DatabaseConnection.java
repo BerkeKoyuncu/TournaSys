@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:sqlite:tournasys.db";
+    private static final String DEFAULT_URL = "jdbc:sqlite:tournasys.db";
 
     static {
         try {
@@ -20,7 +20,12 @@ public class DatabaseConnection {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL);
+        String url = System.getProperty("tournasys.db.url", DEFAULT_URL);
+        Connection connection = DriverManager.getConnection(url);
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("PRAGMA foreign_keys = ON");
+        }
+        return connection;
     }
 
     public static void initializeDatabase() {
@@ -86,7 +91,13 @@ public class DatabaseConnection {
 
         String insertDefaultUser = """
                 INSERT OR IGNORE INTO users (user_id, username, password_hash, role)
-                VALUES (1, 'berke', '1234', 'manager');
+                VALUES (1, 'berke', '170842', 'manager');
+                """;
+
+        String migrateDefaultUserPassword = """
+                UPDATE users
+                SET password_hash = '170842'
+                WHERE username = 'berke' AND password_hash = '1234';
                 """;
 
         try (Connection connection = getConnection();
@@ -98,6 +109,7 @@ public class DatabaseConnection {
             statement.execute(createMatchesTable);
             statement.execute(createStandingsTable);
             statement.execute(insertDefaultUser);
+            statement.execute(migrateDefaultUserPassword);
 
             System.out.println("Database initialized successfully.");
 

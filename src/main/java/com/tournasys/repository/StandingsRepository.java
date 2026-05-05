@@ -114,4 +114,22 @@ public class StandingsRepository {
 
         return false;
     }
+
+    public boolean deleteByTeamId(int teamId) {
+        String sql = "DELETE FROM standings WHERE team_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, teamId);
+            stmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Standing delete by team error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

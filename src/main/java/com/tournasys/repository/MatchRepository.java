@@ -67,6 +67,7 @@ public class MatchRepository {
                 JOIN teams ht ON m.home_team_id = ht.team_id
                 JOIN teams at ON m.away_team_id = at.team_id
                 WHERE m.tournament_id = ?
+                ORDER BY m.match_date ASC, m.match_id ASC
                 """;
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -148,6 +149,43 @@ public class MatchRepository {
 
         } catch (SQLException e) {
             System.out.println("Match delete error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean deleteByTournamentId(int tournamentId) {
+        String sql = "DELETE FROM matches WHERE tournament_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, tournamentId);
+            stmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Match delete by tournament error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean deleteByTeamId(int teamId) {
+        String sql = "DELETE FROM matches WHERE home_team_id = ? OR away_team_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, teamId);
+            stmt.setInt(2, teamId);
+            stmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Match delete by team error: " + e.getMessage());
             e.printStackTrace();
         }
 

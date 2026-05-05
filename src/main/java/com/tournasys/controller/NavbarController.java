@@ -24,6 +24,9 @@ public class NavbarController {
     @FXML
     private Button standingsButton;
 
+    @FXML
+    private Button bracketButton;
+
     public void setActivePage(String page) {
         clearActiveState();
 
@@ -43,6 +46,9 @@ public class NavbarController {
             case "standings":
                 standingsButton.getStyleClass().add("nav-button-active");
                 break;
+            case "bracket":
+                bracketButton.getStyleClass().add("nav-button-active");
+                break;
             default:
                 break;
         }
@@ -54,6 +60,7 @@ public class NavbarController {
         teamsButton.getStyleClass().remove("nav-button-active");
         matchesButton.getStyleClass().remove("nav-button-active");
         standingsButton.getStyleClass().remove("nav-button-active");
+        bracketButton.getStyleClass().remove("nav-button-active");
     }
 
     @FXML
@@ -81,7 +88,12 @@ public class NavbarController {
         SceneManager.switchScene("/com/tournasys/fxml/standings-view.fxml");
     }
 
-     @FXML
+    @FXML
+    public void goBracket(ActionEvent event) {
+        SceneManager.switchScene("/com/tournasys/fxml/bracket-view.fxml");
+    }
+
+    @FXML
     private void handleLogout() {
         SessionManager.logout();
 

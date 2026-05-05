@@ -7,11 +7,14 @@ import com.tournasys.util.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 public class TournamentController {
 
@@ -20,6 +23,10 @@ public class TournamentController {
     @FXML private TextField nameField;
     @FXML private ComboBox<String> typeBox;
     @FXML private TableView<Tournament> table;
+    @FXML private Button createButton;
+    @FXML private Button deleteButton;
+    @FXML private VBox operationCard;
+    @FXML private Label subtitleLabel;
 
     @FXML private TableColumn<Tournament, Integer> idColumn;
     @FXML private TableColumn<Tournament, String> nameColumn;
@@ -41,6 +48,7 @@ public class TournamentController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        applyRolePermissions();
         loadTournaments();
     }
 
@@ -101,6 +109,17 @@ public class TournamentController {
     private void clearFields() {
         nameField.clear();
         typeBox.setValue(null);
+    }
+
+    private void applyRolePermissions() {
+        boolean manager = SessionManager.isManager();
+        operationCard.setVisible(manager);
+        operationCard.setManaged(manager);
+        subtitleLabel.setText(manager ? "Create and manage tournaments." : "View available tournaments.");
+        nameField.setDisable(!manager);
+        typeBox.setDisable(!manager);
+        createButton.setDisable(!manager);
+        deleteButton.setDisable(!manager);
     }
 
     private void showError(String message) {

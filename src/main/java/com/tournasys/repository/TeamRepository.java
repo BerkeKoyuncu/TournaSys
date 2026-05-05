@@ -62,6 +62,27 @@ public class TeamRepository {
         return teams;
     }
 
+    public Integer findTournamentIdByTeamId(int teamId) {
+        String sql = "SELECT tournament_id FROM teams WHERE team_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, teamId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("tournament_id");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public boolean deleteTeam(int teamId) {
         String sql = "DELETE FROM teams WHERE team_id = ?";
 
@@ -70,6 +91,23 @@ public class TeamRepository {
 
             stmt.setInt(1, teamId);
             return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean deleteByTournamentId(int tournamentId) {
+        String sql = "DELETE FROM teams WHERE tournament_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, tournamentId);
+            stmt.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();

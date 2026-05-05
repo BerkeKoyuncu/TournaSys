@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tournasys.controller.BracketController"
+            stylesheets="@../css/app.css"
+            styleClass="root-container">
+
+    <top>
+        <fx:include fx:id="navbar" source="navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <Label text="Bracket" styleClass="page-title"/>
+            <Label text="View knockout brackets and league fixtures." styleClass="page-subtitle"/>
+
+            <VBox spacing="12" styleClass="card">
+                <Label text="Tournament" styleClass="form-label"/>
+                <ComboBox fx:id="tournamentBox"
+                          promptText="Select Tournament"
+                          prefWidth="360"
+                          styleClass="input-field"/>
+                <Label fx:id="winnerLabel"
+                       text="Winner: Not decided yet"
+                       styleClass="tournament-winner-label"/>
+
+                <ScrollPane fitToHeight="true"
+                            fitToWidth="false"
+                            hbarPolicy="AS_NEEDED"
+                            vbarPolicy="AS_NEEDED"
+                            prefHeight="430"
+                            styleClass="bracket-scroll">
+                    <content>
+                        <HBox fx:id="bracketContainer"
+                              spacing="28"
+                              styleClass="bracket-container"/>
+                    </content>
+                </ScrollPane>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

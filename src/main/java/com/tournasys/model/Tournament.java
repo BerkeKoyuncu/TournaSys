@@ -8,7 +8,7 @@ import com.tournasys.exception.DuplicateTeamException;
 import com.tournasys.interfaces.Manageable;
 import com.tournasys.interfaces.Schedulable;
 
-public class Tournament implements Schedulable , Manageable {
+public class Tournament implements Schedulable, Manageable {
     private final int tournamentId;
     private String name;
     private String type;
@@ -30,9 +30,9 @@ public class Tournament implements Schedulable , Manageable {
     @Override
     public void addTeam(Team team) throws DuplicateTeamException {
         if (team == null) {
-        throw new IllegalArgumentException("Team cannot be null");
+            throw new IllegalArgumentException("Team cannot be null");
         }
-        
+
         for (Team existingTeam : teams) {
             if (existingTeam.getName().equalsIgnoreCase(team.getName())) {
                 throw new DuplicateTeamException("Team already exists in this tournament: " + team.getName());
@@ -64,9 +64,19 @@ public class Tournament implements Schedulable , Manageable {
         matches.clear();
 
         if (teams.size() < 2) {
-        throw new IllegalStateException("At least 2 teams required to generate schedule.");
+            throw new IllegalStateException("At least 2 teams required to generate schedule.");
         }
 
+        if ("Knockout".equalsIgnoreCase(type)) {
+            generateKnockoutRound(teams, LocalDateTime.now().plusDays(1));
+        } else {
+            generateLeagueSchedule();
+        }
+
+        status = "Scheduled";
+    }
+
+    private void generateLeagueSchedule() {
         int matchId = 1;
         LocalDateTime startDate = LocalDateTime.now().plusDays(1);
 
@@ -83,8 +93,25 @@ public class Tournament implements Schedulable , Manageable {
                 matchId++;
             }
         }
+    }
 
-        status = "Scheduled";
+    private void generateKnockoutRound(List<Team> roundTeams, LocalDateTime startDate) {
+        if (roundTeams.size() % 2 != 0) {
+            throw new IllegalStateException("Knockout tournaments require an even number of teams.");
+        }
+
+        int matchId = matches.size() + 1;
+
+        for (int i = 0; i < roundTeams.size(); i += 2) {
+            matches.add(new Match(
+                    matchId,
+                    startDate.plusDays(matchId - 1),
+                    roundTeams.get(i),
+                    roundTeams.get(i + 1)
+            ));
+
+            matchId++;
+        }
     }
 
     public void updateStandings() {
@@ -116,10 +143,10 @@ public class Tournament implements Schedulable , Manageable {
     }
 
     public Team findTeamById(int teamId) {
-    return teams.stream()
-            .filter(t -> t.getTeamId() == teamId)
-            .findFirst()
-            .orElse(null);
+        return teams.stream()
+                .filter(t -> t.getTeamId() == teamId)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -133,9 +160,9 @@ public class Tournament implements Schedulable , Manageable {
     }
 
     public boolean isCompleted() {
-    return matches.stream().allMatch(Match::isCompleted);
+        return !matches.isEmpty() && matches.stream().allMatch(Match::isCompleted);
     }
-    
+
     public int getTournamentId() {
         return tournamentId;
     }
@@ -174,5 +201,10 @@ public class Tournament implements Schedulable , Manageable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -27,15 +27,16 @@
             </padding>
 
             <Label text="Dashboard" styleClass="page-title"/>
-            <Label text="Manage your tournaments efficiently." styleClass="page-subtitle"/>
+            <Label fx:id="subtitleLabel" text="Manage your tournaments efficiently." styleClass="page-subtitle"/>
 
             <VBox spacing="10" styleClass="card">
                 <Label text="Quick Actions" styleClass="page-title"/>
 
-                <Button text="Create Tournament" onAction="#goToTournaments" styleClass="primary-button"/>
-                <Button text="Manage Teams" onAction="#goToTeams" styleClass="primary-button"/>
-                <Button text="Schedule Matches" onAction="#goToMatches" styleClass="primary-button"/>
-                <Button text="View Standings" onAction="#goToStandings" styleClass="primary-button"/>
+                <Button fx:id="tournamentsButton" text="Create Tournament" onAction="#goToTournaments" styleClass="primary-button"/>
+                <Button fx:id="teamsButton" text="Manage Teams" onAction="#goToTeams" styleClass="primary-button"/>
+                <Button fx:id="matchesButton" text="Schedule Matches" onAction="#goToMatches" styleClass="primary-button"/>
+                <Button fx:id="standingsButton" text="View Standings" onAction="#goToStandings" styleClass="primary-button"/>
+                <Button fx:id="bracketButton" text="View Bracket" onAction="#goToBracket" styleClass="primary-button"/>
             </VBox>
         </VBox>
     </center>

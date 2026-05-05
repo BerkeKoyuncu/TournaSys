@@ -67,7 +67,7 @@ public class TournamentRepository {
 
     public List<Tournament> findAll() {
         List<Tournament> tournaments = new ArrayList<>();
-        String sql = "SELECT * FROM tournaments";
+        String sql = "SELECT * FROM tournaments ORDER BY tournament_id DESC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -96,6 +96,23 @@ public class TournamentRepository {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, tournamentId);
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean updateStatus(int tournamentId, String status) {
+        String sql = "UPDATE tournaments SET status = ? WHERE tournament_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, status);
+            stmt.setInt(2, tournamentId);
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {

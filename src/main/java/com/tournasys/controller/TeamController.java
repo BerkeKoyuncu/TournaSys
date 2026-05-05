@@ -8,12 +8,15 @@ import com.tournasys.service.TournamentService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 public class TeamController {
 
@@ -22,6 +25,10 @@ public class TeamController {
     @FXML private TextField teamNameField;
     @FXML private ComboBox<Tournament> tournamentBox;
     @FXML private TableView<Team> teamTable;
+    @FXML private Button addButton;
+    @FXML private Button deleteButton;
+    @FXML private VBox operationCard;
+    @FXML private Label subtitleLabel;
 
     @FXML private TableColumn<Team, Integer> teamIdColumn;
     @FXML private TableColumn<Team, String> teamNameColumn;
@@ -40,6 +47,7 @@ public class TeamController {
 
         setupTournamentBox();
         loadTournaments();
+        applyRolePermissions();
 
         tournamentBox.setOnAction(event -> loadTeams());
     }
@@ -129,6 +137,16 @@ public class TeamController {
                 setText(empty || item == null ? null : item.getName());
             }
         });
+    }
+
+    private void applyRolePermissions() {
+        boolean manager = com.tournasys.util.SessionManager.isManager();
+        operationCard.setVisible(manager);
+        operationCard.setManaged(manager);
+        subtitleLabel.setText(manager ? "Create and manage teams." : "View teams by tournament.");
+        teamNameField.setDisable(!manager);
+        addButton.setDisable(!manager);
+        deleteButton.setDisable(!manager);
     }
 
     private void showError(String message) {

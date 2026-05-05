@@ -27,24 +27,26 @@
             </padding>
 
             <Label text="Team Management" styleClass="page-title"/>
-            <Label text="Create and manage teams." styleClass="page-subtitle"/>
+            <Label fx:id="subtitleLabel" text="Create and manage teams." styleClass="page-subtitle"/>
 
             <HBox spacing="20">
 
                 <VBox spacing="10" styleClass="card" prefWidth="320">
-                    <Label text="Create Team" styleClass="page-title"/>
+                    <Label text="Tournament" styleClass="page-title"/>
 
                     <Label text="Tournament"/>
                     <ComboBox fx:id="tournamentBox" styleClass="input-field" prefWidth="270"/>
 
-                    <Label text="Team Name"/>
-                    <TextField fx:id="teamNameField" styleClass="input-field"/>
+                    <VBox fx:id="operationCard" spacing="10">
+                        <Label text="Team Name"/>
+                        <TextField fx:id="teamNameField" styleClass="input-field"/>
 
-                    <HBox spacing="10">
-                        <Button text="Add" onAction="#handleAddTeam" styleClass="primary-button"/>
-                        <Button text="Delete Selected" onAction="#handleDeleteTeam" styleClass="secondary-button"/>
-                        <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
-                    </HBox>
+                        <HBox spacing="10">
+                            <Button fx:id="addButton" text="Add" onAction="#handleAddTeam" styleClass="primary-button"/>
+                            <Button fx:id="deleteButton" text="Delete Selected" onAction="#handleDeleteTeam" styleClass="secondary-button"/>
+                            <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
 
                 <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">

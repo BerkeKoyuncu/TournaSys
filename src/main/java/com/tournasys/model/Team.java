@@ -20,25 +20,29 @@ public class Team {
     }
 
     public void setStats(int played, int won, int drawn, int lost, int points) {
-    this.played = played;
-    this.won = won;
-    this.drawn = drawn;
-    this.lost = lost;
-    this.points = points;
+        this.played = played;
+        this.won = won;
+        this.drawn = drawn;
+        this.lost = lost;
+        this.points = points;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Team)) return false;
+        if (this == obj) {
+            return true;
+        }
 
-        Team other = (Team) obj;
-        return this.teamId == other.teamId;
+        if (!(obj instanceof Team other)) {
+            return false;
+        }
+
+        return teamId > 0 && other.teamId > 0 && teamId == other.teamId;
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(teamId);
+        return teamId > 0 ? Integer.hashCode(teamId) : System.identityHashCode(this);
     }
 
     public void recordWin() {
